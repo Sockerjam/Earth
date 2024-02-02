@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		571898222B6A7C91005EAE7A /* EarthApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571898212B6A7C91005EAE7A /* EarthApp.swift */; };
+		571898262B6A7C92005EAE7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 571898252B6A7C92005EAE7A /* Assets.xcassets */; };
+		571898292B6A7C92005EAE7A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 571898282B6A7C92005EAE7A /* Preview Assets.xcassets */; };
+		571898332B6A7CD0005EAE7A /* earth.obj in Resources */ = {isa = PBXBuildFile; fileRef = 571898312B6A7CD0005EAE7A /* earth.obj */; };
+		571898342B6A7CD0005EAE7A /* earth.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 571898322B6A7CD0005EAE7A /* earth.mtl */; };
+		571898362B6A7D3F005EAE7A /* earth.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 571898352B6A7D3F005EAE7A /* earth.jpeg */; };
+		571898392B6A7D56005EAE7A /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571898372B6A7D56005EAE7A /* MetalView.swift */; };
+		5718983A2B6A7D56005EAE7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571898382B6A7D56005EAE7A /* ContentView.swift */; };
+		5718983C2B6A7D99005EAE7A /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718983B2B6A7D99005EAE7A /* Renderer.swift */; };
+		5718983E2B6A7E15005EAE7A /* VertexDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718983D2B6A7E15005EAE7A /* VertexDescriptor.swift */; };
+		571898402B6A7FD3005EAE7A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718983F2B6A7FD3005EAE7A /* Model.swift */; };
+		571898432B6A828A005EAE7A /* TextureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571898422B6A828A005EAE7A /* TextureLoader.swift */; };
+		571898452B6A847E005EAE7A /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571898442B6A847E005EAE7A /* Texture.swift */; };
+		571898472B6B92C6005EAE7A /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571898462B6B92C6005EAE7A /* Material.swift */; };
+		571898492B6B9CB7005EAE7A /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 571898482B6B9CB7005EAE7A /* Shaders.metal */; };
+		57AD63362B6C281B0010092A /* Matrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD63352B6C281B0010092A /* Matrices.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5718981E2B6A7C91005EAE7A /* Earth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earth.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		571898212B6A7C91005EAE7A /* EarthApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthApp.swift; sourceTree = "<group>"; };
+		571898252B6A7C92005EAE7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		571898282B6A7C92005EAE7A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5718982A2B6A7C92005EAE7A /* Earth.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Earth.entitlements; sourceTree = "<group>"; };
+		571898312B6A7CD0005EAE7A /* earth.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = earth.obj; sourceTree = "<group>"; };
+		571898322B6A7CD0005EAE7A /* earth.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = earth.mtl; sourceTree = "<group>"; };
+		571898352B6A7D3F005EAE7A /* earth.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = earth.jpeg; sourceTree = "<group>"; };
+		571898372B6A7D56005EAE7A /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
+		571898382B6A7D56005EAE7A /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = ../../2DTextures/2DTextures/Views/ContentView.swift; sourceTree = "<group>"; };
+		5718983B2B6A7D99005EAE7A /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		5718983D2B6A7E15005EAE7A /* VertexDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexDescriptor.swift; sourceTree = "<group>"; };
+		5718983F2B6A7FD3005EAE7A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		571898422B6A828A005EAE7A /* TextureLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureLoader.swift; sourceTree = "<group>"; };
+		571898442B6A847E005EAE7A /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
+		571898462B6B92C6005EAE7A /* Material.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
+		571898482B6B9CB7005EAE7A /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		57AD63322B6C26DD0010092A /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		57AD63342B6C27B10010092A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		57AD63352B6C281B0010092A /* Matrices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrices.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5718981B2B6A7C91005EAE7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		571898152B6A7C91005EAE7A = {
+			isa = PBXGroup;
+			children = (
+				571898202B6A7C91005EAE7A /* Earth */,
+				5718981F2B6A7C91005EAE7A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5718981F2B6A7C91005EAE7A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5718981E2B6A7C91005EAE7A /* Earth.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		571898202B6A7C91005EAE7A /* Earth */ = {
+			isa = PBXGroup;
+			children = (
+				571898212B6A7C91005EAE7A /* EarthApp.swift */,
+				57AD63332B6C27AB0010092A /* Views */,
+				571898412B6A81CB005EAE7A /* Texture */,
+				571898302B6A7CA0005EAE7A /* Model */,
+				571898382B6A7D56005EAE7A /* ContentView.swift */,
+				5718983B2B6A7D99005EAE7A /* Renderer.swift */,
+				5718983D2B6A7E15005EAE7A /* VertexDescriptor.swift */,
+				57AD63352B6C281B0010092A /* Matrices.swift */,
+				571898482B6B9CB7005EAE7A /* Shaders.metal */,
+				57AD63322B6C26DD0010092A /* Common.h */,
+				571898252B6A7C92005EAE7A /* Assets.xcassets */,
+				571898352B6A7D3F005EAE7A /* earth.jpeg */,
+				5718982A2B6A7C92005EAE7A /* Earth.entitlements */,
+				571898272B6A7C92005EAE7A /* Preview Content */,
+			);
+			path = Earth;
+			sourceTree = "<group>";
+		};
+		571898272B6A7C92005EAE7A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				571898282B6A7C92005EAE7A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		571898302B6A7CA0005EAE7A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				571898322B6A7CD0005EAE7A /* earth.mtl */,
+				571898312B6A7CD0005EAE7A /* earth.obj */,
+				5718983F2B6A7FD3005EAE7A /* Model.swift */,
+				571898462B6B92C6005EAE7A /* Material.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		571898412B6A81CB005EAE7A /* Texture */ = {
+			isa = PBXGroup;
+			children = (
+				571898422B6A828A005EAE7A /* TextureLoader.swift */,
+				571898442B6A847E005EAE7A /* Texture.swift */,
+			);
+			path = Texture;
+			sourceTree = "<group>";
+		};
+		57AD63332B6C27AB0010092A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				57AD63342B6C27B10010092A /* ContentView.swift */,
+				571898372B6A7D56005EAE7A /* MetalView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5718981D2B6A7C91005EAE7A /* Earth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5718982D2B6A7C92005EAE7A /* Build configuration list for PBXNativeTarget "Earth" */;
+			buildPhases = (
+				5718981A2B6A7C91005EAE7A /* Sources */,
+				5718981B2B6A7C91005EAE7A /* Frameworks */,
+				5718981C2B6A7C91005EAE7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Earth;
+			productName = Earth;
+			productReference = 5718981E2B6A7C91005EAE7A /* Earth.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		571898162B6A7C91005EAE7A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					5718981D2B6A7C91005EAE7A = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = 571898192B6A7C91005EAE7A /* Build configuration list for PBXProject "Earth" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 571898152B6A7C91005EAE7A;
+			productRefGroup = 5718981F2B6A7C91005EAE7A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5718981D2B6A7C91005EAE7A /* Earth */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5718981C2B6A7C91005EAE7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				571898342B6A7CD0005EAE7A /* earth.mtl in Resources */,
+				571898292B6A7C92005EAE7A /* Preview Assets.xcassets in Resources */,
+				571898262B6A7C92005EAE7A /* Assets.xcassets in Resources */,
+				571898362B6A7D3F005EAE7A /* earth.jpeg in Resources */,
+				571898332B6A7CD0005EAE7A /* earth.obj in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5718981A2B6A7C91005EAE7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5718983E2B6A7E15005EAE7A /* VertexDescriptor.swift in Sources */,
+				571898472B6B92C6005EAE7A /* Material.swift in Sources */,
+				571898452B6A847E005EAE7A /* Texture.swift in Sources */,
+				5718983C2B6A7D99005EAE7A /* Renderer.swift in Sources */,
+				571898492B6B9CB7005EAE7A /* Shaders.metal in Sources */,
+				571898432B6A828A005EAE7A /* TextureLoader.swift in Sources */,
+				571898392B6A7D56005EAE7A /* MetalView.swift in Sources */,
+				571898402B6A7FD3005EAE7A /* Model.swift in Sources */,
+				5718983A2B6A7D56005EAE7A /* ContentView.swift in Sources */,
+				571898222B6A7C91005EAE7A /* EarthApp.swift in Sources */,
+				57AD63362B6C281B0010092A /* Matrices.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5718982B2B6A7C92005EAE7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5718982C2B6A7C92005EAE7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		5718982E2B6A7C92005EAE7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Earth/Earth.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Earth/Preview Content\"";
+				DEVELOPMENT_TEAM = M79UR55F3F;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.niclas.Earth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = Earth/Common.h;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5718982F2B6A7C92005EAE7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Earth/Earth.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Earth/Preview Content\"";
+				DEVELOPMENT_TEAM = M79UR55F3F;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.niclas.Earth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = Earth/Common.h;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		571898192B6A7C91005EAE7A /* Build configuration list for PBXProject "Earth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5718982B2B6A7C92005EAE7A /* Debug */,
+				5718982C2B6A7C92005EAE7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5718982D2B6A7C92005EAE7A /* Build configuration list for PBXNativeTarget "Earth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5718982E2B6A7C92005EAE7A /* Debug */,
+				5718982F2B6A7C92005EAE7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 571898162B6A7C91005EAE7A /* Project object */;
+}
