@@ -16,18 +16,12 @@ class Renderer: NSObject {
     private var pipelineState: MTLRenderPipelineState?
     private var depthStencilState: MTLDepthStencilState?
     
-    var timer: Float = 0
+    var lastTime: Double = CFAbsoluteTimeGetCurrent()
     var angle: Float = 4
     
     var matrix = Matrix()
     
-    lazy private var earthModel: Model = {
-        Model(fileName: "earth", device: Renderer.device)
-    }()
-    
-    lazy private var spaceModel: Model = {
-        Model(fileName: "SpaceSphere", device: Renderer.device)
-    }()
+    lazy var gameScene: GameScene = GameScene()
     
     init(metalView: MTKView) {
         
@@ -89,16 +83,7 @@ class Renderer: NSObject {
 extension Renderer: MTKViewDelegate {
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        
-        let aspect = Float(view.bounds.width) / Float(view.bounds.height)
-        
-        let projectionMatrix = float4x4(
-            projectionFov: Float(70).degreesToRadians,
-            near: 0.1,
-            far: 100,
-            aspect: aspect)
-        
-        matrix.projectionMatrix = projectionMatrix
+        gameScene.update(size: size)
     }
     
     func draw(in view: MTKView) {
@@ -118,17 +103,20 @@ extension Renderer: MTKViewDelegate {
         encoder.setDepthStencilState(depthStencilState)
         encoder.setRenderPipelineState(pipelineState)
         
-        timer += 1/60 * 4
+        matrix.viewMatrix = gameScene.fpCamera.viewMatrix
+        matrix.projectionMatrix = gameScene.fpCamera.projectionMatrix
         
-        matrix.viewMatrix = float4x4(translation: [0, 0, -2]).inverse
+        let currentTime = CFAbsoluteTimeGetCurrent()
+        let deltaTime = Float(lastTime - currentTime)
+        lastTime = currentTime
         
-        let rotationMatrix = float4x4(angle: timer.degreesToRadians)
-        let rotationMatrixX = float4x4(angleX: timer.degreesToRadians)
+        gameScene.update(time: deltaTime)
         
-        earthModel.transform.rotation = rotationMatrixX * rotationMatrix
-        earthModel.transform.translation = matrix_identity_float4x4
-        
-        earthModel.render(matrix: matrix, encoder: encoder)
+        gameScene.models.forEach { model in
+            
+            model.render(matrix: matrix, encoder: encoder)
+            
+        }
         
         encoder.endEncoding()
         guard let drawable = view.currentDrawable else { return }

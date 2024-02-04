@@ -18,7 +18,3 @@ protocol Transformable {
     
     var transform: Transform { get set }
 }
-
-extension Transformable {
-    
-}

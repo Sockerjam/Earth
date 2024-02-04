@@ -26,6 +26,11 @@
 		57C591002B6D49A400548D1E /* space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 57C590FF2B6D49A400548D1E /* space.jpg */; };
 		57C591072B6FA4FA00548D1E /* SpaceSphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 57C591052B6FA4FA00548D1E /* SpaceSphere.obj */; };
 		57C591082B6FA4FA00548D1E /* SpaceSphere.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 57C591062B6FA4FA00548D1E /* SpaceSphere.mtl */; };
+		57C5910B2B6FCA6B00548D1E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C5910A2B6FCA6B00548D1E /* GameScene.swift */; };
+		57C5910E2B6FCCF100548D1E /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C5910D2B6FCCF100548D1E /* Camera.swift */; };
+		57C591102B6FCDA100548D1E /* FPCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C5910F2B6FCDA100548D1E /* FPCamera.swift */; };
+		57C591132B6FD48600548D1E /* InputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C591122B6FD48600548D1E /* InputController.swift */; };
+		57C591162B6FDBF400548D1E /* Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C591152B6FDBF400548D1E /* Movement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +57,11 @@
 		57C590FF2B6D49A400548D1E /* space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = space.jpg; sourceTree = "<group>"; };
 		57C591052B6FA4FA00548D1E /* SpaceSphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SpaceSphere.obj; sourceTree = "<group>"; };
 		57C591062B6FA4FA00548D1E /* SpaceSphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SpaceSphere.mtl; sourceTree = "<group>"; };
+		57C5910A2B6FCA6B00548D1E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		57C5910D2B6FCCF100548D1E /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		57C5910F2B6FCDA100548D1E /* FPCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPCamera.swift; sourceTree = "<group>"; };
+		57C591122B6FD48600548D1E /* InputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputController.swift; sourceTree = "<group>"; };
+		57C591152B6FDBF400548D1E /* Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +94,11 @@
 		571898202B6A7C91005EAE7A /* Earth */ = {
 			isa = PBXGroup;
 			children = (
+				57C591142B6FDBE500548D1E /* Settings */,
 				571898212B6A7C91005EAE7A /* EarthApp.swift */,
+				57C591092B6FCA5E00548D1E /* GameScene */,
+				57C5910C2B6FCCE300548D1E /* Camera */,
+				57C591112B6FD47900548D1E /* Controller */,
 				57AD63332B6C27AB0010092A /* Views */,
 				571898412B6A81CB005EAE7A /* Texture */,
 				571898302B6A7CA0005EAE7A /* Models */,
@@ -156,6 +170,39 @@
 				57C591052B6FA4FA00548D1E /* SpaceSphere.obj */,
 			);
 			path = Sky;
+			sourceTree = "<group>";
+		};
+		57C591092B6FCA5E00548D1E /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				57C5910A2B6FCA6B00548D1E /* GameScene.swift */,
+			);
+			path = GameScene;
+			sourceTree = "<group>";
+		};
+		57C5910C2B6FCCE300548D1E /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				57C5910D2B6FCCF100548D1E /* Camera.swift */,
+				57C5910F2B6FCDA100548D1E /* FPCamera.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		57C591112B6FD47900548D1E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				57C591122B6FD48600548D1E /* InputController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		57C591142B6FDBE500548D1E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				57C591152B6FDBF400548D1E /* Movement.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,15 +281,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57C591102B6FCDA100548D1E /* FPCamera.swift in Sources */,
 				57C590FA2B6D122400548D1E /* Transform.swift in Sources */,
 				5718983E2B6A7E15005EAE7A /* VertexDescriptor.swift in Sources */,
+				57C591132B6FD48600548D1E /* InputController.swift in Sources */,
+				57C591162B6FDBF400548D1E /* Movement.swift in Sources */,
 				571898472B6B92C6005EAE7A /* Material.swift in Sources */,
 				5718983C2B6A7D99005EAE7A /* Renderer.swift in Sources */,
 				571898492B6B9CB7005EAE7A /* Shaders.metal in Sources */,
 				571898432B6A828A005EAE7A /* TextureLoader.swift in Sources */,
+				57C5910B2B6FCA6B00548D1E /* GameScene.swift in Sources */,
 				571898392B6A7D56005EAE7A /* MetalView.swift in Sources */,
 				571898402B6A7FD3005EAE7A /* Model.swift in Sources */,
 				5718983A2B6A7D56005EAE7A /* ContentView.swift in Sources */,
+				57C5910E2B6FCCF100548D1E /* Camera.swift in Sources */,
 				571898222B6A7C91005EAE7A /* EarthApp.swift in Sources */,
 				57AD63362B6C281B0010092A /* Matrices.swift in Sources */,
 			);
