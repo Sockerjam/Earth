@@ -21,8 +21,12 @@ class Renderer: NSObject {
     
     var matrix = Matrix()
     
-    lazy private var model: Model = {
+    lazy private var earthModel: Model = {
         Model(fileName: "earth", device: Renderer.device)
+    }()
+    
+    lazy private var spaceModel: Model = {
+        Model(fileName: "SpaceSphere", device: Renderer.device)
     }()
     
     init(metalView: MTKView) {
@@ -116,36 +120,16 @@ extension Renderer: MTKViewDelegate {
         
         timer += 1/60 * 4
         
-        let translationMatrix = matrix_identity_float4x4
+        matrix.viewMatrix = float4x4(translation: [0, 0, -2]).inverse
+        
         let rotationMatrix = float4x4(angle: timer.degreesToRadians)
         let rotationMatrixX = float4x4(angleX: timer.degreesToRadians)
-        let viewMatrix = float4x4(translation: [0, 0, 2])
         
-        matrix.modelMatrix = rotationMatrixX * rotationMatrix * translationMatrix
-        matrix.viewMatrix = viewMatrix
+        earthModel.transform.rotation = rotationMatrixX * rotationMatrix
+        earthModel.transform.translation = matrix_identity_float4x4
         
-        encoder.setVertexBytes(&matrix, length: MemoryLayout<Matrix>.stride, index: 10)
+        earthModel.render(matrix: matrix, encoder: encoder)
         
-        for (index, meshBuffer) in model.mtkMesh.vertexBuffers.enumerated() {
-            
-            encoder.setVertexBuffer(meshBuffer.buffer, offset: 0, index: index)
-        }
-        
-        for material in model.materialProperties {
-            
-            encoder.setFragmentTexture(material.baseColorTexture, index: 0)
-        }
-        
-        for subMesh in model.mtkMesh.submeshes {
-            
-            encoder.drawIndexedPrimitives(
-                type: .triangle,
-                indexCount: subMesh.indexCount,
-                indexType: subMesh.indexType,
-                indexBuffer: subMesh.indexBuffer.buffer,
-                indexBufferOffset: subMesh.indexBuffer.offset)
-        }
- 
         encoder.endEncoding()
         guard let drawable = view.currentDrawable else { return }
         commandBuffer.present(drawable)

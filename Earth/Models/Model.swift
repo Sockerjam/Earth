@@ -9,6 +9,7 @@ import MetalKit
 
 class Model {
     
+    var transform: Transform = Transform()
     let mtkMesh: MTKMesh
     var materialProperties: [MaterialProperty] = []
     
@@ -56,8 +57,6 @@ class Model {
             
             let texture = TextureController.texture(fileName: textureURL.absoluteString)
             
-            print("MODEL TExture", texture?.label)
-            
             materialProperty.baseColorTexture = texture
             
             self.materialProperties.append(materialProperty)
@@ -65,4 +64,37 @@ class Model {
         }
         
     }
+}
+
+extension Model {
+    
+    func render(matrix: Matrix, encoder: MTLRenderCommandEncoder) {
+        var matrix = matrix
+        
+        matrix.modelMatrix = transform.scale * transform.rotation * transform.translation
+        
+        encoder.setVertexBytes(&matrix, length: MemoryLayout<Matrix>.stride, index: 10)
+        
+        for (index, meshBuffer) in mtkMesh.vertexBuffers.enumerated() {
+            
+            encoder.setVertexBuffer(meshBuffer.buffer, offset: 0, index: index)
+        }
+        
+        for material in materialProperties {
+            
+            encoder.setFragmentTexture(material.baseColorTexture, index: 0)
+        }
+        
+        for subMesh in mtkMesh.submeshes {
+            
+            encoder.drawIndexedPrimitives(
+                type: .triangle,
+                indexCount: subMesh.indexCount,
+                indexType: subMesh.indexType,
+                indexBuffer: subMesh.indexBuffer.buffer,
+                indexBufferOffset: subMesh.indexBuffer.offset)
+        }
+        
+    }
+    
 }

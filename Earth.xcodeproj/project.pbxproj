@@ -19,10 +19,13 @@
 		5718983E2B6A7E15005EAE7A /* VertexDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718983D2B6A7E15005EAE7A /* VertexDescriptor.swift */; };
 		571898402B6A7FD3005EAE7A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718983F2B6A7FD3005EAE7A /* Model.swift */; };
 		571898432B6A828A005EAE7A /* TextureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571898422B6A828A005EAE7A /* TextureLoader.swift */; };
-		571898452B6A847E005EAE7A /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571898442B6A847E005EAE7A /* Texture.swift */; };
 		571898472B6B92C6005EAE7A /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571898462B6B92C6005EAE7A /* Material.swift */; };
 		571898492B6B9CB7005EAE7A /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 571898482B6B9CB7005EAE7A /* Shaders.metal */; };
 		57AD63362B6C281B0010092A /* Matrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD63352B6C281B0010092A /* Matrices.swift */; };
+		57C590FA2B6D122400548D1E /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C590F92B6D122400548D1E /* Transform.swift */; };
+		57C591002B6D49A400548D1E /* space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 57C590FF2B6D49A400548D1E /* space.jpg */; };
+		57C591072B6FA4FA00548D1E /* SpaceSphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 57C591052B6FA4FA00548D1E /* SpaceSphere.obj */; };
+		57C591082B6FA4FA00548D1E /* SpaceSphere.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 57C591062B6FA4FA00548D1E /* SpaceSphere.mtl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,12 +43,15 @@
 		5718983D2B6A7E15005EAE7A /* VertexDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexDescriptor.swift; sourceTree = "<group>"; };
 		5718983F2B6A7FD3005EAE7A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		571898422B6A828A005EAE7A /* TextureLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureLoader.swift; sourceTree = "<group>"; };
-		571898442B6A847E005EAE7A /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
 		571898462B6B92C6005EAE7A /* Material.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
 		571898482B6B9CB7005EAE7A /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		57AD63322B6C26DD0010092A /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		57AD63342B6C27B10010092A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		57AD63352B6C281B0010092A /* Matrices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrices.swift; sourceTree = "<group>"; };
+		57C590F92B6D122400548D1E /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
+		57C590FF2B6D49A400548D1E /* space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = space.jpg; sourceTree = "<group>"; };
+		57C591052B6FA4FA00548D1E /* SpaceSphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SpaceSphere.obj; sourceTree = "<group>"; };
+		57C591062B6FA4FA00548D1E /* SpaceSphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SpaceSphere.mtl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +87,7 @@
 				571898212B6A7C91005EAE7A /* EarthApp.swift */,
 				57AD63332B6C27AB0010092A /* Views */,
 				571898412B6A81CB005EAE7A /* Texture */,
-				571898302B6A7CA0005EAE7A /* Model */,
+				571898302B6A7CA0005EAE7A /* Models */,
 				571898382B6A7D56005EAE7A /* ContentView.swift */,
 				5718983B2B6A7D99005EAE7A /* Renderer.swift */,
 				5718983D2B6A7E15005EAE7A /* VertexDescriptor.swift */,
@@ -90,6 +96,7 @@
 				57AD63322B6C26DD0010092A /* Common.h */,
 				571898252B6A7C92005EAE7A /* Assets.xcassets */,
 				571898352B6A7D3F005EAE7A /* earth.jpeg */,
+				57C590FF2B6D49A400548D1E /* space.jpg */,
 				5718982A2B6A7C92005EAE7A /* Earth.entitlements */,
 				571898272B6A7C92005EAE7A /* Preview Content */,
 			);
@@ -104,22 +111,22 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		571898302B6A7CA0005EAE7A /* Model */ = {
+		571898302B6A7CA0005EAE7A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				571898322B6A7CD0005EAE7A /* earth.mtl */,
-				571898312B6A7CD0005EAE7A /* earth.obj */,
+				57C590F82B6D10CC00548D1E /* Sky */,
+				57C590F72B6D10BB00548D1E /* Earth */,
 				5718983F2B6A7FD3005EAE7A /* Model.swift */,
 				571898462B6B92C6005EAE7A /* Material.swift */,
+				57C590F92B6D122400548D1E /* Transform.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		571898412B6A81CB005EAE7A /* Texture */ = {
 			isa = PBXGroup;
 			children = (
 				571898422B6A828A005EAE7A /* TextureLoader.swift */,
-				571898442B6A847E005EAE7A /* Texture.swift */,
 			);
 			path = Texture;
 			sourceTree = "<group>";
@@ -131,6 +138,24 @@
 				571898372B6A7D56005EAE7A /* MetalView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		57C590F72B6D10BB00548D1E /* Earth */ = {
+			isa = PBXGroup;
+			children = (
+				571898322B6A7CD0005EAE7A /* earth.mtl */,
+				571898312B6A7CD0005EAE7A /* earth.obj */,
+			);
+			path = Earth;
+			sourceTree = "<group>";
+		};
+		57C590F82B6D10CC00548D1E /* Sky */ = {
+			isa = PBXGroup;
+			children = (
+				57C591062B6FA4FA00548D1E /* SpaceSphere.mtl */,
+				57C591052B6FA4FA00548D1E /* SpaceSphere.obj */,
+			);
+			path = Sky;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,8 +217,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				571898342B6A7CD0005EAE7A /* earth.mtl in Resources */,
+				57C591072B6FA4FA00548D1E /* SpaceSphere.obj in Resources */,
 				571898292B6A7C92005EAE7A /* Preview Assets.xcassets in Resources */,
+				57C591002B6D49A400548D1E /* space.jpg in Resources */,
 				571898262B6A7C92005EAE7A /* Assets.xcassets in Resources */,
+				57C591082B6FA4FA00548D1E /* SpaceSphere.mtl in Resources */,
 				571898362B6A7D3F005EAE7A /* earth.jpeg in Resources */,
 				571898332B6A7CD0005EAE7A /* earth.obj in Resources */,
 			);
@@ -206,9 +234,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57C590FA2B6D122400548D1E /* Transform.swift in Sources */,
 				5718983E2B6A7E15005EAE7A /* VertexDescriptor.swift in Sources */,
 				571898472B6B92C6005EAE7A /* Material.swift in Sources */,
-				571898452B6A847E005EAE7A /* Texture.swift in Sources */,
 				5718983C2B6A7D99005EAE7A /* Renderer.swift in Sources */,
 				571898492B6B9CB7005EAE7A /* Shaders.metal in Sources */,
 				571898432B6A828A005EAE7A /* TextureLoader.swift in Sources */,
