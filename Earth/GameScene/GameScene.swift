@@ -21,16 +21,15 @@ class GameScene {
     var deltaTime: Float = 0.0
     
     init() {
-        fpCamera.transform.translation = float4x4(translation: [0, 0, -2])
+        fpCamera.transform.translation = [0, 0, -2]
     }
     
     func update(time: Float) {
         deltaTime += time
-        let rotationMatrix = float4x4(angle: angle * deltaTime)
-        let rotationMatrixX = float4x4(angleX: angle * deltaTime)
+        let angle = angle * deltaTime
         
-        earthModel.transform.rotation = rotationMatrixX * rotationMatrix
-        earthModel.transform.translation = matrix_identity_float4x4
+        
+        earthModel.transform.rotation = [angle, angle, 0]
         
         fpCamera.update(time: time)
 

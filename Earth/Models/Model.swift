@@ -71,7 +71,7 @@ extension Model {
     func render(matrix: Matrix, encoder: MTLRenderCommandEncoder) {
         var matrix = matrix
         
-        matrix.modelMatrix = transform.scale * transform.rotation * transform.translation
+        matrix.modelMatrix = transform.modelMatrix
         
         encoder.setVertexBytes(&matrix, length: MemoryLayout<Matrix>.stride, index: 10)
         

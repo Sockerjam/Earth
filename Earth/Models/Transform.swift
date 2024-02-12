@@ -9,9 +9,20 @@ import MetalKit
 
 struct Transform {
     
-    var translation: float4x4 = float4x4(translation: [0, 0, 0])
-    var rotation: float4x4 = float4x4(angle: 0)
-    var scale: float4x4 = float4x4(scale: [1, 1, 1])
+    var translation: SIMD3<Float> = [0, 0, 0]
+    var rotation: SIMD3<Float> = [0, 0, 0]
+    var scale: SIMD3<Float> = [1, 1, 1]
+    var rotationMatrix: float4x4 = matrix_identity_float4x4
+}
+
+extension Transform {
+    
+    var modelMatrix: float4x4 {
+        let translation = float4x4(translation: translation)
+        let rotation = float4x4(angle: rotation)
+        let scale = float4x4(scale: scale)
+        return scale * rotation * translation
+    }
 }
 
 protocol Transformable {

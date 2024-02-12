@@ -36,13 +36,21 @@ extension float4x4 {
         self = matrix
     }
     
+    // Rotation
+    init(angle: SIMD3<Float>) {
+        let matrixX = float4x4(angleX: angle.x)
+        let matrixY = float4x4(angleY: angle.y)
+        let matrixZ = float4x4(angleZ: angle.z)
+        let matrix = matrixX * matrixY * matrixZ
+        self = matrix
+    }
     
     // Rotation
-    init(angle: Float) {
+    init(angleY: Float) {
         let matrix = float4x4(
-            [cos(angle), 0, -sin(angle), 0],
+            [cos(angleY), 0, -sin(angleY), 0],
             [0,          1,     0,       0],
-            [sin(angle), 0, cos(angle),  0],
+            [sin(angleY), 0, cos(angleY),  0],
             [0,          0,      0,      1]
         )
         
@@ -51,14 +59,23 @@ extension float4x4 {
     
     // Rotation
     init(angleX: Float) {
-        let angle = angleX / 2
         let matrix = float4x4(
             [1, 0,        0,               0],
-            [0, cos(angle), -sin(angle), 0],
-            [0, sin(angle), cos(angle),  0],
+            [0, cos(angleX), -sin(angleX), 0],
+            [0, sin(angleX), cos(angleX),  0],
             [0,          0,      0,      1]
         )
-        
+        self = matrix
+    }
+    
+    // Rotation
+    init(angleZ: Float) {
+        let matrix = float4x4(
+            [cos(angleZ), -sin(angleZ), 0, 0],
+            [sin(angleZ), cos(angleZ), 0,  0],
+            [0,             0,         1,  0],
+            [0,             0,         0,   1]
+        )
         
         self = matrix
     }

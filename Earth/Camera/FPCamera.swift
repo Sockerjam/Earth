@@ -11,21 +11,25 @@ class FPCamera: Camera, Transformable {
     
     var transform: Transform = Transform()
     var translation: Movement = .translation(1)
-    var rotation: Movement = .rotation(0)
+    var rotation: Movement = .rotation(0.005)
     
     private var aspectRatio: Float = 1
     private let fov = Float(70).degreesToRadians
     private let near: Float = 0.01
     private let far: Float = 100
-    
-    
+        
+    var rotationVector = SIMD3<Float>(0, 0, 0)
+    var rotationQuaternion = simd_quatf(ix: 0, iy: 0, iz: 0, r: 1)
     
     var projectionMatrix: float4x4 {
         float4x4(projectionFov: fov, near: near, far: far, aspect: aspectRatio)
     }
     
     var viewMatrix: float4x4 {
-        transform.translation.inverse
+        let translation = float4x4(translation: transform.translation).inverse
+        let rotation = float4x4(angle: rotationVector)
+        let qRotation = transform.rotationMatrix
+        return qRotation * translation
     }
     
     func update(size: CGSize) {
@@ -34,32 +38,62 @@ class FPCamera: Camera, Transformable {
     
     func update(time: Float) {
         
-        let translationSpeed = time * translation.speed
-        var directionVector = SIMD3<Float>(0, 0, 0)
+        let speed = time * translation.speed
         
-        if InputController.shared.keysPressed.contains(.keyW) {
-            directionVector.z -= 1
-        }
-        
-        if InputController.shared.keysPressed.contains(.keyS) {
-            directionVector.z += 1
-        }
+        let currentForwardVector = rotationQuaternion.act(SIMD3<Float>(0, 0, -1))
         
         if InputController.shared.keysPressed.contains(.keyA) {
-            directionVector.x += 1
+            let deltaRotation = simd_quatf(angle: -speed, axis: SIMD3<Float>(0, 1, 0))
+            rotationQuaternion = simd_mul(deltaRotation, rotationQuaternion)
         }
         
         if InputController.shared.keysPressed.contains(.keyD) {
-            directionVector.x -= 1
+            let deltaRotation = simd_quatf(angle: speed, axis: SIMD3<Float>(0, 1, 0))
+            rotationQuaternion = simd_mul(deltaRotation, rotationQuaternion)
         }
         
-        if directionVector != SIMD3<Float>(0, 0, 0) {
-            let normalisedVector = simd_normalize(directionVector)
-            let translationVector = normalisedVector * translationSpeed
-            
-            transform.translation.columns.3 += SIMD4<Float>(translationVector, 0)
+        transform.rotationMatrix = quaternionToMatrix(q: rotationQuaternion)
+        
+        if InputController.shared.keysPressed.contains(.keyW) {
+            transform.translation += (currentForwardVector) * speed
         }
         
+        if InputController.shared.keysPressed.contains(.keyS) {
+            transform.translation -= (currentForwardVector) * speed
+        }
+        
+//        if move {
+//            let forwardVectorNormal = simd_normalize(rotatedForwardVector)
+//            transform.translation += (forwardVectorNormal) * speed
+//        }
+        
+    }
+    
+    func createQuternion() -> float4x4 {
+        
+        let x = simd_quatf(angle: rotationVector.x, axis: SIMD3<Float>(1, 0, 0))
+        let y = simd_quatf(angle: rotationVector.y, axis: SIMD3<Float>(0, 1, 0))
+        let z = simd_quatf(angle: rotationVector.z, axis: SIMD3<Float>(0, 0, 1))
+        
+        let q = z * y * x
+        
+       return quaternionToMatrix(q: q)
+    }
+    
+    func quaternionToMatrix(q: simd_quatf) -> simd_float4x4 {
+        let x = q.vector.x
+        let y = q.vector.y
+        let z = q.vector.z
+        let w = q.vector.w
+        
+        let matrix = simd_float4x4(rows: [
+            SIMD4(1 - 2*y*y - 2*z*z,     2*x*y - 2*w*z,     2*x*z + 2*w*y, 0),
+            SIMD4(    2*x*y + 2*w*z, 1 - 2*x*x - 2*z*z,     2*y*z - 2*w*x, 0),
+            SIMD4(    2*x*z - 2*w*y,     2*y*z + 2*w*x, 1 - 2*x*x - 2*y*y, 0),
+            SIMD4(                0,                 0,                 0, 1)
+        ])
+        
+        return matrix
     }
     
 }

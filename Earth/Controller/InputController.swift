@@ -10,10 +10,19 @@ import Combine
 
 class InputController {
     
+    struct Point {
+      var x: Float
+      var y: Float
+      static let zero = Point(x: 0, y: 0)
+    }
+    
     static let shared = InputController()
     
     var keysPressed = Set<GCKeyCode>()
     var cancellables = Set<AnyCancellable>()
+    
+    var leftMouseDown = false
+    var mouseDelta = Point.zero
     
     private init() {
         setupGameControllerSubscription()
@@ -37,6 +46,19 @@ class InputController {
                        }
                    }
                }
+               .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: .GCMouseDidConnect, object: nil)
+            .compactMap { $0.object as? GCMouse }
+            .sink(receiveValue: { [weak self] mouse in
+                guard let self = self else { return }
+                mouse.mouseInput?.leftButton.pressedChangedHandler = {_, _, pressed in
+                    self.leftMouseDown = pressed
+                }
+                mouse.mouseInput?.mouseMovedHandler = {_, deltaX, deltaY in
+                    self.mouseDelta = Point(x: deltaX, y: deltaY)
+                }
+            })
                .store(in: &cancellables)
     }
     

@@ -34,7 +34,8 @@ vertex VertexOut vertex_main(const VertexIn in [[stage_in]], constant Matrix &ma
 
 fragment float4 fragment_main(const VertexOut in [[stage_in]], texture2d<float> baseColorTexture [[texture(0)]])
 {
-    constexpr sampler textureSampler;
+    
+    constexpr sampler textureSampler(filter::linear);
     float3 baseColor = baseColorTexture.sample(textureSampler, in.uv).rgb;
     return float4(baseColor, 1);
 }
