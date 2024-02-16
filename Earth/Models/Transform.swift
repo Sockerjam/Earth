@@ -21,7 +21,7 @@ extension Transform {
         let translation = float4x4(translation: translation)
         let rotation = float4x4(angle: rotation)
         let scale = float4x4(scale: scale)
-        return translation * rotation * scale
+        return scale * rotation * translation
     }
 }
 
