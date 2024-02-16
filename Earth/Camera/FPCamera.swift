@@ -20,6 +20,7 @@ class FPCamera: Camera, Transformable {
         
     var rotationVector = SIMD3<Float>(0, 0, 0)
     var rotationQuaternion = simd_quatf(ix: 0, iy: 0, iz: 0, r: 1)
+    var forwardVector = SIMD4<Float>(0, 0, -1, 1)
     
     var projectionMatrix: float4x4 {
         float4x4(projectionFov: fov, near: near, far: far, aspect: aspectRatio)
@@ -27,9 +28,8 @@ class FPCamera: Camera, Transformable {
     
     var viewMatrix: float4x4 {
         let translation = float4x4(translation: transform.translation).inverse
-        let rotation = float4x4(angle: rotationVector)
-        let qRotation = transform.rotationMatrix
-        return qRotation * translation
+        let rotation = transform.rotationMatrix
+        return rotation * translation
     }
     
     func update(size: CGSize) {
@@ -37,10 +37,8 @@ class FPCamera: Camera, Transformable {
     }
     
     func update(time: Float) {
-        
+
         let speed = time * translation.speed
-        
-        let currentForwardVector = rotationQuaternion.act(SIMD3<Float>(0, 0, -1))
         
         if InputController.shared.keysPressed.contains(.keyA) {
             let deltaRotation = simd_quatf(angle: -speed, axis: SIMD3<Float>(0, 1, 0))
@@ -54,19 +52,16 @@ class FPCamera: Camera, Transformable {
         
         transform.rotationMatrix = quaternionToMatrix(q: rotationQuaternion)
         
+        let forwardVector = transform.rotationMatrix * forwardVector
+        
         if InputController.shared.keysPressed.contains(.keyW) {
-            transform.translation += (currentForwardVector) * speed
+            transform.translation += SIMD3<Float>(-forwardVector.x, forwardVector.y, forwardVector.z) * speed
         }
         
         if InputController.shared.keysPressed.contains(.keyS) {
-            transform.translation -= (currentForwardVector) * speed
+
+            transform.translation -= SIMD3<Float>(-forwardVector.x, forwardVector.y, forwardVector.z) * speed
         }
-        
-//        if move {
-//            let forwardVectorNormal = simd_normalize(rotatedForwardVector)
-//            transform.translation += (forwardVectorNormal) * speed
-//        }
-        
     }
     
     func createQuternion() -> float4x4 {

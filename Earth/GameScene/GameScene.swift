@@ -28,7 +28,6 @@ class GameScene {
         deltaTime += time
         let angle = angle * deltaTime
         
-        
         earthModel.transform.rotation = [angle, angle, 0]
         
         fpCamera.update(time: time)
