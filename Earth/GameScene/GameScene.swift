@@ -10,12 +10,18 @@ import MetalKit
 class GameScene {
     
     lazy var earthModel: Model = {
-        Model(fileName: "earth", device: Renderer.device)
+        Model(fileName: "earth", device: MetalView.mainDevice)
+    }()
+    
+    var skybox: Model = {
+        Model(fileName: "space", device: MetalView.mainDevice)
     }()
     
     lazy var models: [Model] = [earthModel]
     
     var fpCamera: Camera = FPCamera()
+    
+    let sceneLighting = SceneLighting()
     
     let angle = Float(1).degreesToRadians
     var deltaTime: Float = 0.0
@@ -37,4 +43,5 @@ class GameScene {
     func update(size: CGSize) {
         fpCamera.update(size: size)
     }
+    
 }

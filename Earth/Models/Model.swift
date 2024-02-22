@@ -13,7 +13,11 @@ class Model {
     let mtkMesh: MTKMesh
     var materialProperties: [MaterialProperty] = []
     
-    init(fileName: String, device: MTLDevice) {
+    init(fileName: String, device: MTLDevice?) {
+        
+        guard let device = device else {
+            fatalError("Device is nil")
+        }
         
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "obj") else {
             fatalError("Couldnt load url")
@@ -27,7 +31,7 @@ class Model {
             
             do {
                 mtkMesh = try MTKMesh(mesh: modelMesh, device: device)
-                loadMaterials(from: modelMesh)
+                loadMaterials(from: modelMesh, device: device)
             } catch {
                 fatalError("Couldn't load model mesh data")
             }
@@ -37,7 +41,7 @@ class Model {
         }
     }
     
-    private func loadMaterials(from mesh: MDLMesh) {
+    private func loadMaterials(from mesh: MDLMesh, device: MTLDevice) {
         
         guard let submeshes = mesh.submeshes as? [MDLSubmesh] else { return }
         
@@ -55,7 +59,7 @@ class Model {
                 return
             }
             
-            let texture = TextureController.texture(fileName: textureURL.absoluteString)
+            let texture = TextureController.texture(fileName: textureURL.absoluteString, device: device)
             
             materialProperty.baseColorTexture = texture
             
@@ -68,12 +72,17 @@ class Model {
 
 extension Model {
     
-    func render(matrix: Matrix, encoder: MTLRenderCommandEncoder) {
+    func render(matrix: Matrix, params: Params, encoder: MTLRenderCommandEncoder) {
         var matrix = matrix
         
         matrix.modelMatrix = transform.modelMatrix
+        matrix.normalMatrix = transform.modelMatrix.upperleft
         
         encoder.setVertexBytes(&matrix, length: MemoryLayout<Matrix>.stride, index: 10)
+        
+        var params = params
+        
+        encoder.setFragmentBytes(&params, length: MemoryLayout<Params>.stride, index: ParamsBuffer.index)
         
         for (index, meshBuffer) in mtkMesh.vertexBuffers.enumerated() {
             

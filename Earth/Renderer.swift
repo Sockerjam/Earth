@@ -10,8 +10,8 @@ import Combine
 
 class Renderer: NSObject {
     
-    static var device: MTLDevice!
-    static var commandQueue: MTLCommandQueue!
+    var device: MTLDevice!
+    var commandQueue: MTLCommandQueue!
     
     private var pipelineState: MTLRenderPipelineState?
     private var depthStencilState: MTLDepthStencilState?
@@ -20,32 +20,30 @@ class Renderer: NSObject {
     var angle: Float = 4
     
     var matrix = Matrix()
+    var params = Params()
     
-    lazy var gameScene: GameScene = GameScene()
+    var gameScene: GameScene
+    var skyboxRenderer: SkyBoxRenderer
     
-    init(metalView: MTKView) {
+    init(device: MTLDevice, metalView: MTKView, gameScene: GameScene, skyboxRenderer: SkyBoxRenderer?) {
         
-        guard 
-            let device = MTLCreateSystemDefaultDevice(),
-            let commandQueue = device.makeCommandQueue() 
+        guard
+            let commandQueue = device.makeCommandQueue(),
+            let skyboxRenderer = skyboxRenderer
         else {
-            fatalError("Failed to setup device")
+            fatalError("Failed to setup commandQueue")
         }
         
-        Renderer.device = device
-        Renderer.commandQueue = commandQueue
-        metalView.device = device
+        self.device = device
+        self.commandQueue = commandQueue
+        
+        self.gameScene = gameScene
+        self.skyboxRenderer = skyboxRenderer
         
         super.init()
         metalView.delegate = self
         setupPipelineState(view: metalView)
         buildDepthStencilState()
-        metalView.clearColor = MTLClearColor(
-            red: 0,
-            green: 0,
-            blue: 0,
-            alpha: 1.0)
-        metalView.depthStencilPixelFormat = .depth32Float
         mtkView(metalView, drawableSizeWillChange: metalView.drawableSize)
     }
     
@@ -53,12 +51,12 @@ class Renderer: NSObject {
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.depthCompareFunction = .less
         descriptor.isDepthWriteEnabled = true
-        depthStencilState = Renderer.device.makeDepthStencilState(descriptor: descriptor)
+        depthStencilState = device.makeDepthStencilState(descriptor: descriptor)
     }
         
     private func setupPipelineState(view: MTKView) {
         
-        guard let library = Renderer.device.makeDefaultLibrary() else {
+        guard let library = device.makeDefaultLibrary() else {
             fatalError("Couldn't create library")
         }
         
@@ -73,7 +71,7 @@ class Renderer: NSObject {
         pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
         
         do {
-            pipelineState = try Renderer.device.makeRenderPipelineState(descriptor: pipelineDescriptor)
+            pipelineState = try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
         } catch {
             fatalError("Couldn't create pipeline state")
         }
@@ -88,7 +86,7 @@ extension Renderer: MTKViewDelegate {
     
     func draw(in view: MTKView) {
         guard
-            let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
+            let commandBuffer = commandQueue.makeCommandBuffer(),
             let renderPassDescriptor = view.currentRenderPassDescriptor,
             let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
         else {
@@ -100,11 +98,20 @@ extension Renderer: MTKViewDelegate {
             let depthStencilState = depthStencilState
         else { return }
         
+        skyboxRenderer.draw(in: view, encoder: encoder)
+        
         encoder.setDepthStencilState(depthStencilState)
         encoder.setRenderPipelineState(pipelineState)
         
         matrix.viewMatrix = gameScene.fpCamera.viewMatrix
         matrix.projectionMatrix = gameScene.fpCamera.projectionMatrix
+        
+        var lighting = gameScene.sceneLighting.lights
+        params.lightCount = UInt32(lighting.count)
+        
+        encoder.setFragmentBytes(&lighting, length: MemoryLayout<Light>.stride * lighting.count, index: LightBuffer.index)
+        
+        params.cameraPosition = gameScene.fpCamera.transform.translation
         
         let currentTime = CFAbsoluteTimeGetCurrent()
         let deltaTime = Float(lastTime - currentTime)
@@ -114,7 +121,7 @@ extension Renderer: MTKViewDelegate {
         
         gameScene.models.forEach { model in
             
-            model.render(matrix: matrix, encoder: encoder)
+            model.render(matrix: matrix, params: params, encoder: encoder)
             
         }
         

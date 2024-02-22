@@ -10,14 +10,25 @@ import MetalKit
 
 struct MetalView: View {
     
+    @State private var skyboxRenderer: SkyBoxRenderer?
     @State private var renderer: Renderer?
     @State private var metalView = MTKView()
     
+    static var mainDevice: MTLDevice?
+    
     var body: some View {
         VStack {
-            MetalViewRepresentable(renderer: renderer, metalView: $metalView)
+            MetalViewRepresentable(skyboxRenderer: skyboxRenderer, renderer: renderer, metalView: $metalView)
             .onAppear {
-                renderer = Renderer(metalView: metalView)
+                guard let device = MTLCreateSystemDefaultDevice() else {
+                    fatalError("Failed to create device")
+                }
+                MetalView.mainDevice = device
+                metalView.device = MetalView.mainDevice
+                metalView.depthStencilPixelFormat = .depth32Float
+                let gameScene = GameScene()
+                skyboxRenderer = SkyBoxRenderer(device: MetalView.mainDevice, metalView: metalView, gameScene: gameScene)
+                renderer = Renderer(device: device, metalView: metalView, gameScene: gameScene, skyboxRenderer: skyboxRenderer)
             }
         }
     }
@@ -32,6 +43,7 @@ typealias MyMetalView = UIView
 #endif
 
 struct MetalViewRepresentable: ViewRepresentable {
+    let skyboxRenderer: SkyBoxRenderer?
     let renderer: Renderer?
     @Binding var metalView: MTKView
     

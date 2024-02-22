@@ -12,12 +12,12 @@ enum TextureController {
     // This will store the textures loaded by our model
     static var texture: [String: MTLTexture] = [:]
     
-    static func loadTexture(fileName: String) -> MTLTexture? {
+    static func loadTexture(fileName: String, device: MTLDevice) -> MTLTexture? {
         
-        let textureLoader = MTKTextureLoader(device: Renderer.device)
+        let textureLoader = MTKTextureLoader(device: device)
         let textureOptions: [MTKTextureLoader.Option: Any] = [
             .origin: MTKTextureLoader.Origin.bottomLeft,
-            .SRGB: false
+            .SRGB: true
         ]
         
         // Get file extension
@@ -40,7 +40,7 @@ enum TextureController {
         return texture
     }
     
-    static func texture(fileName: String) -> MTLTexture? {
+    static func texture(fileName: String, device: MTLDevice) -> MTLTexture? {
         
         // Checks if texture is already stored
         if let fileName = texture[fileName] {
@@ -48,7 +48,7 @@ enum TextureController {
         }
         
         // Loads texture
-        guard let loadedTexture = loadTexture(fileName: fileName) else { return nil }
+        guard let loadedTexture = loadTexture(fileName: fileName, device: device) else { return nil }
         
         // Saves it to dictionary to be returned if it's already saved
         texture[fileName] = loadedTexture
